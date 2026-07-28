@@ -648,7 +648,7 @@ function applyScheduleToMonth(){
       if(DB.attendance[key] && (DB.attendance[key].status==="연차" || DB.attendance[key].status==="결근")) continue;
       const dow=new Date(y,m-1,d).getDay();
       const sc=getSchedule(e.id, dow);
-       DB.attendance[key]={employeeId:e.id, date:day, status: sc.on?"출근":"휴무"};
+       DB.attendance[key]={employeeId:e.id, date:day, status: sc.on?(sc.start&&sc.start>="23:00"?"마감":"출근"):"휴무"};
       count++;
     }
   });
